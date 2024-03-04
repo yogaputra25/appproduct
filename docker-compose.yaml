@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest # Or a specific version like mysql:8.0.30
+    ports:
+      - '3306:3306' # Adjust port mapping if needed
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root' # Replace with a strong password
+      MYSQL_DATABASE: 'cekk' # Replace with your desired database name
+    volumes:
+      - mysql_data:/var/lib/mysql # Optional: Persistent data volume
+  rabbitmq:
+    image: rabbitmq:3.12-management # Or a specific version like rabbitmq:3.9.13
+    ports:
+      - '5672:5672' # Adjust port mapping if needed
+      - '15672:15672' # Management UI (optional)
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest # Optional: Persistent data volume
+
+volumes:
+  mysql_data: # Optional: Create a named volume for MySQL data persistence
+  rabbitmq_data: # Optional: Create a named volume for RabbitMQ data persistence
+
+# Add network configuration and additional services as needed
